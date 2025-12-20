@@ -1,0 +1,5 @@
+net\tfminecraft\guides\Guides.class
+net\tfminecraft\guides\loader\GuideLoader.class
+net\tfminecraft\guides\manager\GuideManager.class
+net\tfminecraft\guides\guide\Guide.class
+net\tfminecraft\guides\manager\CommandManager.class
