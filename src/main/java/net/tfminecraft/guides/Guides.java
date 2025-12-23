@@ -2,8 +2,7 @@ package net.tfminecraft.guides;
 
 import java.io.File;
 
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
+
 import org.bukkit.plugin.java.JavaPlugin;
 
 import net.tfminecraft.guides.loader.GuideLoader;
@@ -16,15 +15,16 @@ public class Guides extends JavaPlugin{
     private final GuideManager guideManager = new GuideManager();
     private final GuideLoader guideLoader = new GuideLoader();
  
+    //Runs when the server starts or plugin reloads
     @Override 
     public void onEnable() {
+        //Makes it possible to do Guides.getInstance()
         plugin = this;
         createFolders();
-        for (Player p : Bukkit.getOnlinePlayers()) {
-            p.sendMessage("Halo");
-        }
+        
         File f = new File(getDataFolder(), "guides");
 
+        //Loads all files inside guides folder
         for(final File guide : f.listFiles()){
             if(!guide.isDirectory()){
                 guideLoader.load(guide);

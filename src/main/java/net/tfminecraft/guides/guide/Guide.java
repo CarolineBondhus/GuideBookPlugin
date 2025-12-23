@@ -9,9 +9,11 @@ public class Guide {
     private String id;
     private List<String> pages = new ArrayList<>();
     
+
     public Guide(String key, ConfigurationSection config) {
         id = key;
         for(String s : config.getStringList("pages")){
+            //Adds pages to list
             pages.add(s);
         }
     }

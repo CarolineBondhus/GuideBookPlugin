@@ -6,20 +6,19 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 
 import net.tfminecraft.guides.guide.Guide;
-import net.tfminecraft.guides.loader.GuideLoader;
 
 public class GuideManager {
-    public void openBook(Player p) {
+
+    public void openBook(Player p, Guide guide) {
     
         ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
         BookMeta meta = (BookMeta) book.getItemMeta();
-        meta.setTitle("Halo");
-        meta.setAuthor("Caroline");
-        Guide guide = GuideLoader.getByString("test");
+        // Adds each guide page as a page in the book
         for(String page : guide.getPages()){
             meta.addPage(page);
         }
         book.setItemMeta(meta);
+        
 
         p.openBook(book);
     }

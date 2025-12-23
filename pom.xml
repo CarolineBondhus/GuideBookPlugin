@@ -19,7 +19,7 @@
             <artifactId>spigot-api</artifactId>
             <version>1.21.8</version>
             <scope>system</scope>
-            <systemPath>D:/Documents/TFMC/ReferenceLibs/spigot-api.jar</systemPath>
+            <systemPath>C:/Users/carol/Documents-local/TFMC/ReferenceLibs/spigot-api.jar</systemPath>
         </dependency>
     </dependencies>
 
@@ -36,7 +36,7 @@
                         <configuration>
                             <target>
                                 <copy file="${project.build.directory}/${project.build.finalName}.jar"
-                                    tofile="D:/Documents/TFMC/Builds/Guides/${project.build.finalName}.jar"/>
+                                    tofile="C:/Users/carol/Documents-local/TFMC/Builds/Guides/${project.build.finalName}.jar"/>
                             </target>
                         </configuration>
                     </execution>
