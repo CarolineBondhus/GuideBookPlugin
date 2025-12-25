@@ -31,8 +31,8 @@ public class Guides extends JavaPlugin{
             }
         }
         getCommand(commands.cmd1).setExecutor(commands);
-
-
+        //Add listener to the runtime
+        getServer().getPluginManager().registerEvents(guideManager, plugin);
     }
 
     public static Guides getInstance() {

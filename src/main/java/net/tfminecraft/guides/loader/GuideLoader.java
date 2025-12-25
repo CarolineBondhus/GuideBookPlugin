@@ -10,6 +10,7 @@ import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.event.block.BlockFromToEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 
@@ -51,7 +52,7 @@ public class GuideLoader {
     }
 
     public static void create(Player p, ItemStack item){
-         BookMeta meta = (BookMeta) item.getItemMeta();
+        BookMeta meta = (BookMeta) item.getItemMeta();
         String title = meta.getTitle();
 
         //Create a guide file
@@ -82,4 +83,26 @@ public class GuideLoader {
             oList.add(r);
         }
     }
+
+    public static void save(Guide guide, Player p){
+        String title = guide.getId();
+
+        //Create a guide file
+        File guidesFolder = new File("plugins/Guides/guides");
+        File guideFile = new File(guidesFolder, title + ".yml");
+
+        YamlConfiguration config =  new YamlConfiguration();
+
+        //Save pages
+        config.set(title + ".pages", guide.getPages());
+
+        try {
+            config.save(guideFile);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+
+    }
+
 }

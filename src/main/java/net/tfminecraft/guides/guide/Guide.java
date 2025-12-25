@@ -9,7 +9,7 @@ public class Guide {
     private String id;
     private List<String> pages = new ArrayList<>();
     
-
+    //legge til string med keyword og gjør samme som med
     public Guide(String key, ConfigurationSection config) {
         id = key;
         for(String s : config.getStringList("pages")){
@@ -24,5 +24,9 @@ public class Guide {
 
     public List<String> getPages(){
         return pages;
+    }
+
+    public void setPages(List<String> pages){
+        this.pages = new ArrayList<>(pages);
     }
 }

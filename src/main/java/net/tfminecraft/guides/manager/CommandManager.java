@@ -27,13 +27,32 @@ public class CommandManager implements CommandExecutor{
             if(cmd.getName().equalsIgnoreCase(cmd1)){
                 if(args.length > 0) {
                     String guideId = args[0];
+
                     if(guideId.equalsIgnoreCase("create")){
                         ItemStack item = p.getInventory().getItemInMainHand();
+
                         if(item.getType().equals(Material.WRITTEN_BOOK)){
                             GuideLoader.create(p, item);
                             return true;
                         } else {
                             p.sendMessage("§cYou must be holding a written book to create a guide.");
+                            return true;
+                        }
+                    }
+
+                    if(guideId.equalsIgnoreCase("edit") && args.length > 1 ){
+                        guideId = args[1];
+                        //Finds a guide based on ID
+                        Guide guide = GuideLoader.getByString(guideId);
+                        Guides.getInstance().getGuideManager().editBook(p, guide);
+                        return true;
+                    }
+
+                    if(guideId.equalsIgnoreCase("save")){
+                        ItemStack item = p.getInventory().getItemInMainHand();
+
+                        if(item.getType().equals(Material.WRITABLE_BOOK)){
+                            Guides.getInstance().getGuideManager().saveEditBook(p, item);
                             return true;
                         }
                     }
