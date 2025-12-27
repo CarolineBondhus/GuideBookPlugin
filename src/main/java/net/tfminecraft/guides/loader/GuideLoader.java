@@ -59,9 +59,12 @@ public class GuideLoader {
         File guideFile = new File(guidesFolder, title + ".yml");
 
         YamlConfiguration config = new YamlConfiguration();
+        List<String> keywords = new ArrayList<>();
+        keywords.add(title);
 
         //Save pages
         config.set(title + ".pages", meta.getPages());
+        config.set(title + ".keywords", keywords);
 
         try {
             config.save(guideFile);

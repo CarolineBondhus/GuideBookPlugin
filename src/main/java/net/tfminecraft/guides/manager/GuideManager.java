@@ -12,6 +12,7 @@ import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import net.md_5.bungee.api.chat.BaseComponent;
 import net.tfminecraft.guides.Guides;
 import net.tfminecraft.guides.guide.Guide;
 import net.tfminecraft.guides.loader.GuideLoader;
@@ -22,9 +23,10 @@ public class GuideManager implements Listener{
     
         ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
         BookMeta meta = (BookMeta) book.getItemMeta();
-        // Adds each guide page as a page in the book
-        for(String page : guide.getPages()){
-            meta.addPage(page);
+
+        // Adds parsed interactive pages
+        for(BaseComponent[] page : guide.getParsedPages()){
+            meta.spigot().addPage(page);
         }
         book.setItemMeta(meta);
         

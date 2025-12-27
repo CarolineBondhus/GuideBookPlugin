@@ -21,6 +21,15 @@
             <scope>system</scope>
             <systemPath>C:/Users/carol/Documents-local/TFMC/ReferenceLibs/spigot-api.jar</systemPath>
         </dependency>
+
+        <dependency>
+            <groupId>net.md-5</groupId>
+            <artifactId>bungeecord-chat</artifactId>
+            <version>1.20-R0.1</version>
+            <scope>system</scope>
+            <systemPath>C:/Users/carol/Documents-local/TFMC/ReferenceLibs/BungeeCord.jar</systemPath>
+        </dependency>
+
     </dependencies>
 
     <build>
