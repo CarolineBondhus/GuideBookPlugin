@@ -61,8 +61,19 @@ public class CommandManager implements CommandExecutor{
                         p.sendMessage("§cNo guide with that name exists.");
                         return true;
                     }
+
+                    int page = 1;
+
+                    if(args.length > 1){
+                        try{
+                            page = Integer.parseInt(args[1]);
+                        } catch (NumberFormatException e){
+                            p.sendMessage("§cPage needs to be a number");
+                            return true;
+                        }
+                    }
                     //Get the plugin → get the guide manager → open the guide book
-                    Guides.getInstance().getGuideManager().openBook(p, guide);
+                    Guides.getInstance().getGuideManager().openBook(p, guide, page);
                     return true;
                 } else {
                     p.sendMessage("§cNo guide specified.");

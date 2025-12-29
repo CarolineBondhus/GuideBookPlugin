@@ -30,6 +30,14 @@
             <systemPath>C:/Users/carol/Documents-local/TFMC/ReferenceLibs/BungeeCord.jar</systemPath>
         </dependency>
 
+        <dependency>
+            <groupId>local</groupId>
+            <artifactId>ProtocolLib</artifactId>
+            <version>1.20-R0.1</version>
+            <scope>system</scope>
+            <systemPath>C:/Users/carol/Documents-local/TFMC/ReferenceLibs/ProtocolLib.jar</systemPath>
+        </dependency>
+
     </dependencies>
 
     <build>

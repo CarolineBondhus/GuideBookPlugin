@@ -19,8 +19,7 @@ import net.tfminecraft.guides.loader.GuideLoader;
 
 public class GuideManager implements Listener{
 
-    public void openBook(Player p, Guide guide) {
-    
+    public void openBook(Player p, Guide guide, int pageNumber) {
         ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
         BookMeta meta = (BookMeta) book.getItemMeta();
 
@@ -28,10 +27,16 @@ public class GuideManager implements Listener{
         for(BaseComponent[] page : guide.getParsedPages()){
             meta.spigot().addPage(page);
         }
+
+        int maxPages = meta.getPageCount();
+
+        if (pageNumber < 1) pageNumber = 1;
+        if (pageNumber > maxPages) pageNumber = maxPages;
+
         book.setItemMeta(meta);
-        
 
         p.openBook(book);
+        //TODO support page number opening once mojang allows it (sadge)
     }
 
     public void editBook(Player p, Guide guide){

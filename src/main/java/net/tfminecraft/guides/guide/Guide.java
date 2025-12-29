@@ -3,14 +3,11 @@ package net.tfminecraft.guides.guide;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.bukkit.configuration.ConfigurationSection;
 
-import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.BaseComponent;
-import net.md_5.bungee.api.chat.ClickEvent;
-import net.md_5.bungee.api.chat.TextComponent;
-import net.tfminecraft.guides.loader.GuideLoader;
 import net.tfminecraft.guides.utilities.PageCenter;
 import net.tfminecraft.guides.utilities.PageParser;
 
@@ -18,11 +15,12 @@ public class Guide {
     private String id;
     private List<String> pages = new ArrayList<>();
     private List<String> keywords = new ArrayList<>();
+    private Map<String, Integer> tags = new HashMap<>();
     
     //legge til string med keyword og gjør samme som med
     public Guide(String key, ConfigurationSection config) {
         id = key;
-
+        
         for(String s : config.getStringList("pages")){
             //Adds pages to list
             pages.add(s);
@@ -48,7 +46,24 @@ public class Guide {
     public List<String> getKeywords(){
         return keywords;
     }
+
+    public Map<String, Integer> getTags(){
+        return tags;
+    }
     
+    public void addTag(String text, int index){
+        tags.put(text, index);
+    }
+
+    public void addKeyword(String keyword){
+        if(!keywords.contains(keyword)){
+            keywords.add(keyword);
+        }
+    }
+    
+    public void clearTags() {
+        tags.clear();
+    }
     public String getCoverPage() {
         String coverPage =
             "\n\n\n\n\n" +

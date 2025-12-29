@@ -97,6 +97,9 @@ public class GuideLoader {
 
         //Save pages
         config.set(title + ".pages", guide.getPages());
+        config.set(title + ".keywords", guide.getKeywords());
+
+
 
         try {
             config.save(guideFile);
