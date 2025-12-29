@@ -85,6 +85,7 @@ public class GuideManager implements Listener{
 
         GuideLoader.save(guide, p);
 
+        p.getInventory().getItemInMainHand().setAmount(0);
         p.sendMessage("§aSaved " + guideId);
     }
 }

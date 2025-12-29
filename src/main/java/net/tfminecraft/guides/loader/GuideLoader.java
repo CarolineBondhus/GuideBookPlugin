@@ -69,6 +69,7 @@ public class GuideLoader {
         try {
             config.save(guideFile);
             p.sendMessage("§aGuide '" + title + "' created successfully.");
+            p.getInventory().getItemInMainHand().setAmount(0);
         } catch (IOException e){
             p.sendMessage("§cFailed to create guide");
             e.printStackTrace();
