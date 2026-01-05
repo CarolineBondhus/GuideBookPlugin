@@ -8,6 +8,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import net.tfminecraft.guides.loader.GuideLoader;
 import net.tfminecraft.guides.manager.CommandManager;
 import net.tfminecraft.guides.manager.GuideManager;
+import net.tfminecraft.guides.utilities.GuideTabCompleter;
 
 public class Guides extends JavaPlugin{
     public static Guides plugin;
@@ -31,6 +32,7 @@ public class Guides extends JavaPlugin{
             }
         }
         getCommand(commands.cmd1).setExecutor(commands);
+        getCommand(commands.cmd1).setTabCompleter(new GuideTabCompleter());
         //Add listener to the runtime
         getServer().getPluginManager().registerEvents(guideManager, plugin);
     }
