@@ -17,6 +17,8 @@ public class PageParser {
         guide.clearTags();
 
         List<BaseComponent[]> result = new ArrayList<>();
+        List<BaseComponent[]> cache = new ArrayList<>();
+
 
         //Add coverpage
         result.add(TextComponent.fromLegacyText(guide.getCoverPage()));
@@ -47,10 +49,16 @@ public class PageParser {
                     keywordMap
                 );
             }
-            result.add(components.toArray(new BaseComponent[0]));
+            cache.add(components.toArray(new BaseComponent[0]));
         }
-        System.out.println("Tags: " + guide.getTags());
-        System.out.println("Keywords: " + guide.getKeywords());
+
+        // Add contents pages (can be multiple)
+        for (String contentsPage : guide.getContentsPages()) {
+            result.add(TextComponent.fromLegacyText(contentsPage));
+        }
+
+        //Adds all pages from cache after creating contents page
+        result.addAll(cache);
 
         return result;
 
