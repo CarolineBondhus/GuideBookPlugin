@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import net.tfminecraft.guides.Guides;
+import net.tfminecraft.guides.books.GuideCatalogBook;
 import net.tfminecraft.guides.guide.Guide;
 import net.tfminecraft.guides.loader.GuideLoader;
 
@@ -25,6 +26,10 @@ public class CommandManager implements CommandExecutor{
             Player p = (Player)sender;
             //Checks if commando = /guide
             if(cmd.getName().equalsIgnoreCase(cmd1)){
+                if(args.length== 0){
+                    GuideCatalogBook.open(p);
+                    return true;
+                }
                 if(args.length > 0) {
                     String guideId = args[0];
 
