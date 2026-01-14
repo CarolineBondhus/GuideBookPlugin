@@ -3,6 +3,7 @@ package net.tfminecraft.guides.books;
 import me.Plugins.TLibs.Objects.API.SubAPI.StringFormatter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.bukkit.Bukkit;
@@ -47,8 +48,25 @@ public class GuideCatalogBook {
 
         //Contents pages
         List<BaseComponent> currentPage = new ArrayList<>();
-        currentPage.addAll(java.util.Arrays.asList(
-            TextComponent.fromLegacyText("\n" + PageCenter.centerLine(StringFormatter.formatHex(textColor + "§lAvailable Guides§r"), true) + "\n\n")));
+
+        currentPage.addAll(Arrays.asList(
+            TextComponent.fromLegacyText("\n" +
+                PageCenter.centerLine(
+                    StringFormatter.formatHex(textColor + "§lAvailable Guides"),
+                true
+                )
+            )
+        ));
+
+        currentPage.addAll(Arrays.asList(
+            TextComponent.fromLegacyText("\n" +
+                PageCenter.centerLine(
+                    StringFormatter.formatHex(textColor + "• • •"),
+                    false
+                ) + "\n\n"
+            )
+        ));
+
         int lineCount = 2;
 
         for(Guide guide : guides){
@@ -60,20 +78,27 @@ public class GuideCatalogBook {
                 currentPage.clear();
 
                 currentPage.addAll(java.util.Arrays.asList(TextComponent.fromLegacyText(
-                    PageCenter.centerLine("\n"+StringFormatter.formatHex(textColor + "§lAvailable Guides§r" + "\n\n"), true)
+                    PageCenter.centerLine("\n"+StringFormatter.formatHex(textColor + "§lAvailable Guides§r" + "\n\n" + PageCenter.centerLine("• • •", false) ), false) + "\n\n"
                 )));
                 lineCount = 2;
             }
             
-            TextComponent entry = new TextComponent(StringFormatter.formatHex(textColor +"• " + guide.getId() + "\n"));
+            BaseComponent[] entry = TextComponent.fromLegacyText(
+                StringFormatter.formatHex(textColor + "§o• " + guide.getId() + "\n")
+            );
             //entry.setColor(ChatColor.GOLD);
-            entry.setClickEvent(new ClickEvent(
-                ClickEvent.Action.RUN_COMMAND, 
-                "/guide " + guide.getId()));
+            for (BaseComponent c : entry) {
+                c.setClickEvent(new ClickEvent(
+                    ClickEvent.Action.RUN_COMMAND,
+                    "/guide " + guide.getId()
+                ));
+                currentPage.add(c);
+            }
 
-            currentPage.add(entry);
             lineCount++;
         }
+
+        
 
         if(!currentPage.isEmpty()){
             pages.add(currentPage.toArray(new BaseComponent[0]));

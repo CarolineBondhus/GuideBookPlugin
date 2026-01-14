@@ -17,7 +17,9 @@ public enum CharWidth {
     COMMA(',', 2),
     MINUS('-', 6),
     PERIOD('.', 2),
+    BULLET('•', 2),
     SLASH('/', 6),
+    
 
     ZERO('0', 6),
     ONE('1', 6),
