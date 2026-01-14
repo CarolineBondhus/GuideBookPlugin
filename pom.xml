@@ -38,6 +38,15 @@
             <systemPath>C:/Users/carol/Documents-local/TFMC/ReferenceLibs/ProtocolLib.jar</systemPath>
         </dependency>
 
+        <dependency>
+            <groupId>local</groupId>
+            <artifactId>tlibs</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>C:/Users/carol/Documents-local/TFMC/ReferenceLibs/TLibs.jar</systemPath>
+        </dependency>
+
+
     </dependencies>
 
     <build>

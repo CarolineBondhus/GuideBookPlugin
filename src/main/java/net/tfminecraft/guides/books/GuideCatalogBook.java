@@ -1,5 +1,7 @@
 package net.tfminecraft.guides.books;
 
+import me.Plugins.TLibs.Objects.API.SubAPI.StringFormatter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,12 +31,13 @@ public class GuideCatalogBook {
             .getItemMeta(Material.WRITTEN_BOOK);
 
         List<BaseComponent[]> pages = new ArrayList<>();
+        String textColor = "#7a583c";
 
         //Cover
         pages.add(TextComponent.fromLegacyText(
             "\n\n\n\n" 
-            + PageCenter.centerLine("§6§lServer Guides", true) 
-            + "\n" + PageCenter.centerLine("§7Click a guide to open it", false)
+            + PageCenter.centerLine(StringFormatter.formatHex(textColor +"§lTFMC Guides"), true) 
+            + "\n" + PageCenter.centerLine(StringFormatter.formatHex(textColor + "Click a guide to open it"), false)
         ));
 
         //Sort alphabetically
@@ -45,7 +48,7 @@ public class GuideCatalogBook {
         //Contents pages
         List<BaseComponent> currentPage = new ArrayList<>();
         currentPage.addAll(java.util.Arrays.asList(
-            TextComponent.fromLegacyText("\n§6§lAvailable Guides§r\n\n")));
+            TextComponent.fromLegacyText("\n" + PageCenter.centerLine(StringFormatter.formatHex(textColor + "§lAvailable Guides§r"), true) + "\n\n")));
         int lineCount = 2;
 
         for(Guide guide : guides){
@@ -57,13 +60,13 @@ public class GuideCatalogBook {
                 currentPage.clear();
 
                 currentPage.addAll(java.util.Arrays.asList(TextComponent.fromLegacyText(
-                    "\n§6§lAvailable Guides§r\n\n"
+                    PageCenter.centerLine("\n"+StringFormatter.formatHex(textColor + "§lAvailable Guides§r" + "\n\n"), true)
                 )));
                 lineCount = 2;
             }
             
-            TextComponent entry = new TextComponent("• " + guide.getId() + "\n");
-            entry.setColor(ChatColor.GOLD);
+            TextComponent entry = new TextComponent(StringFormatter.formatHex(textColor +"• " + guide.getId() + "\n"));
+            //entry.setColor(ChatColor.GOLD);
             entry.setClickEvent(new ClickEvent(
                 ClickEvent.Action.RUN_COMMAND, 
                 "/guide " + guide.getId()));
