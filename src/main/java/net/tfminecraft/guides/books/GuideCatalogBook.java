@@ -1,7 +1,5 @@
 package net.tfminecraft.guides.books;
 
-import me.Plugins.TLibs.Objects.API.SubAPI.StringFormatter;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,6 +9,8 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
+
+import me.Plugins.TLibs.Objects.API.SubAPI.StringFormatter;
 
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.BaseComponent;

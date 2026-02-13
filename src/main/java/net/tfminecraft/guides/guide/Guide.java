@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.bukkit.configuration.ConfigurationSection;
 
+import me.Plugins.TLibs.Objects.API.SubAPI.StringFormatter;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.tfminecraft.guides.enums.CharWidth;
 import net.tfminecraft.guides.utilities.PageCenter;
@@ -18,6 +19,7 @@ public class Guide {
     private List<String> keywords = new ArrayList<>();
     private Map<String, Integer> tags = new HashMap<>();
     private static final int MAX_LINES_PER_PAGE = 14;
+    private static final String textColor = "#7a583c";
 
     
     //legge til string med keyword og gjør samme som med
@@ -70,7 +72,7 @@ public class Guide {
     public String getCoverPage() {
         String coverPage =
             "\n\n\n\n\n" +
-            PageCenter.centerLine("§7A guide about", false)+"\n" +
+            PageCenter.centerLine(StringFormatter.formatHex(textColor +"A guide about" +"\n"), false) +
             PageCenter.centerLine("§6§l" + id.toUpperCase() + "§r", true)+"\n\n";
 
         return coverPage;
@@ -103,7 +105,7 @@ public class Guide {
 
         // Start first page
         currentPage.append("\n")
-            .append(PageCenter.centerLine("§6§lContents:§r§0", true))
+            .append(PageCenter.centerLine(StringFormatter.formatHex(textColor +"§lContents:§r§0"), true))
             .append("\n\n");
 
         lineCount = 2; //title + blank line;
@@ -125,7 +127,7 @@ public class Guide {
 
                 currentPage = new StringBuilder();
                 currentPage.append("\n")
-                    .append(PageCenter.centerLine("§6§lContents:§r§0", true))
+                    .append(PageCenter.centerLine(StringFormatter.formatHex(textColor +"§lContents:§r§0"), true))
                     .append("\n\n");
 
                 lineCount = 2;
