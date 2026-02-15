@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.w3c.dom.Text;
+
 import me.Plugins.TLibs.Objects.API.SubAPI.StringFormatter;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.BaseComponent;
@@ -59,7 +61,7 @@ public class PageParser {
 
         // Add contents pages (can be multiple)
         for (String contentsPage : guide.getContentsPages()) {
-            result.add(TextComponent.fromLegacyText(contentsPage));
+            result.add(TextComponent.fromLegacyText(StringFormatter.formatHex(textColor + contentsPage)));
         }
 
         //Adds all pages from cache after creating contents page
@@ -157,9 +159,13 @@ public class PageParser {
 
                 // Text before keyword
                 if (foundIndex > 0) {
-                    components.add(
-                        new TextComponent(remaining.substring(0, foundIndex))
+                    BaseComponent[] parsed = TextComponent.fromLegacyText(
+                        StringFormatter.formatHex(
+                            textColor + remaining.substring(0, foundIndex)
+                        )
                     );
+                    components.addAll(Arrays.asList(parsed));
+
                 }
 
                 // Clickable keyword
@@ -194,7 +200,11 @@ public class PageParser {
 
             // Remaining text
             if (!remaining.isEmpty()) {
-                components.add(new TextComponent(remaining));
+
+                BaseComponent[] parsed = TextComponent.fromLegacyText(
+                    StringFormatter.formatHex(textColor + remaining)
+                );
+                components.addAll(Arrays.asList(parsed));
             }
 
             components.add(new TextComponent("\n"));

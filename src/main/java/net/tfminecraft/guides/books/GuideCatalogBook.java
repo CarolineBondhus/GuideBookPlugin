@@ -82,9 +82,8 @@ public class GuideCatalogBook {
             }
             
             BaseComponent[] entry = TextComponent.fromLegacyText(
-                StringFormatter.formatHex(textColor + "§o• " + guide.getId() + "\n")
+                StringFormatter.formatHex(textColor + " • " + guide.getId() + "\n")
             );
-            //entry.setColor(ChatColor.GOLD);
             for (BaseComponent c : entry) {
                 c.setClickEvent(new ClickEvent(
                     ClickEvent.Action.RUN_COMMAND,
