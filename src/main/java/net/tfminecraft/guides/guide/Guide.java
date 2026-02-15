@@ -73,7 +73,7 @@ public class Guide {
         String coverPage =
             "\n\n\n\n\n" +
             PageCenter.centerLine(StringFormatter.formatHex(textColor +"A guide about" +"\n"), false) +
-            PageCenter.centerLine("§6§l" + id.toUpperCase() + "§r", true)+"\n\n";
+            PageCenter.centerLine(StringFormatter.formatHex(textColor + "§l" + id.toUpperCase() + "§r"), true)+"\n\n";
 
         return coverPage;
     }
@@ -105,7 +105,7 @@ public class Guide {
 
         // Start first page
         currentPage.append("\n")
-            .append(PageCenter.centerLine(StringFormatter.formatHex(textColor +"§lContents:§r§0"), true))
+            .append(PageCenter.centerLine(StringFormatter.formatHex(textColor +"§lContents:§r"), true))
             .append("\n\n");
 
         lineCount = 2; //title + blank line;
@@ -127,7 +127,7 @@ public class Guide {
 
                 currentPage = new StringBuilder();
                 currentPage.append("\n")
-                    .append(PageCenter.centerLine(StringFormatter.formatHex(textColor +"§lContents:§r§0"), true))
+                    .append(PageCenter.centerLine(StringFormatter.formatHex(textColor +"§lContents:§r"), true))
                     .append("\n\n");
 
                 lineCount = 2;
@@ -157,42 +157,67 @@ public class Guide {
         int pageWidth = getPixelWidth(pageStr, bold);
         int dotPx = CharWidth.getWidth('.', bold);
 
-        //Try one line
-        int oneLineWidth = getPixelWidth(title, bold) + pageWidth;
-        if (oneLineWidth < LINE_WIDTH) {
-            int dots = (LINE_WIDTH - oneLineWidth) / dotPx;
-            return title + ".".repeat(dots) + pageStr;
-        }
+        int sidePaddingpx = CharWidth.getWidth(' ', bold) * 2; //2 spaces
+        int usableWidth = LINE_WIDTH - (sidePaddingpx * 2);
 
-        //Two lines : build line 2 first
-        int maxTextWidthLine2 =
-                LINE_WIDTH - pageWidth - (MIN_DOTS * dotPx);
+        List<String> wrapped = wrapTitle(title, usableWidth, bold);
 
-        String[] words = title.split(" ");
-        String line2 = "";
-        int line2Width = 0;
+        StringBuilder result = new StringBuilder();
 
-        //Fill the last line from the back
-        for (int i = words.length - 1; i >= 0; i--) {
-            int w = getPixelWidth(words[i] + " ", bold);
-            if (line2Width + w <= maxTextWidthLine2) {
-                line2 = words[i] + " " + line2;
-                line2Width += w;
+        for (int i = 0; i < wrapped.size(); i++) {
+            String line = wrapped.get(i);
+
+            // Last line gets dots + page number
+            if (i == wrapped.size() - 1) {
+                int dots = Math.max(0,
+                    (usableWidth - getPixelWidth(line, bold) - pageWidth) / dotPx
+                );
+
+                result.append(textColor)
+                    .append("  ")
+                    .append(line)
+                    .append(".".repeat(dots))
+                    .append(pageStr);
             } else {
-                break;
+                result.append(textColor)
+                    .append("  ")
+                    .append(line);
             }
+
+            result.append("\n");
         }
 
-        line2 = line2.trim();
+        return StringFormatter.formatHex(result.toString().trim());
+    }
 
-        //The rest is line 1
-        String line1 = title.substring(0,
-                title.length() - line2.length()).trim();
 
-        int dots = (LINE_WIDTH - getPixelWidth(line2, bold) - pageWidth) / dotPx;
+    private List<String> wrapTitle(String title, int maxWidth, boolean bold) {
+        List<String> lines = new ArrayList<>();
+        String[] words = title.split(" ");
 
-        return line1 + "\n" + line2 + ".".repeat(dots) + pageStr;
-}
+        StringBuilder currentLine = new StringBuilder();
+        int currentWidth = 0;
+
+        for (String word : words) {
+            int wordWidth = getPixelWidth(word + " ", bold);
+
+            if (currentWidth + wordWidth > maxWidth) {
+                lines.add(currentLine.toString().trim());
+                currentLine = new StringBuilder();
+                currentWidth = 0;
+            }
+
+            currentLine.append(word).append(" ");
+            currentWidth += wordWidth;
+        }
+
+        if (!currentLine.isEmpty()) {
+            lines.add(currentLine.toString().trim());
+        }
+
+        return lines;
+    }
+
 
 
     private int getPixelWidth(String text, boolean bold) {

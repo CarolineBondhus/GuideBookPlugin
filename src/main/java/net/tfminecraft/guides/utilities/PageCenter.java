@@ -9,7 +9,10 @@ public class PageCenter {
         final int LINE_WIDTH = 114;
 
         // Remove formatting codes for length calculation
-        String stripped = line.replaceAll("§.", "").trim();
+        String stripped = line
+            .replaceAll("(?i)§x(§[0-9a-f]){6}", "") // remove hex colors
+            .replaceAll("§[0-9a-fk-or]", "")        // remove normal codes
+            .trim();
         
         //Divides text into letters
         char[] letters = stripped.toCharArray();
@@ -20,9 +23,9 @@ public class PageCenter {
             length += CharWidth.getWidth(c, bold);
         }
 
-        int space = (LINE_WIDTH - length) / 2;
-
-        int spacePixels = space/4;
+        int space = Math.max(0, (LINE_WIDTH - length) / 2);
+        
+        int spacePixels = Math.max(0, space / 4);
 
         return " ".repeat(spacePixels) + line;
     }

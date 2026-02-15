@@ -1,10 +1,12 @@
 package net.tfminecraft.guides.utilities;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import me.Plugins.TLibs.Objects.API.SubAPI.StringFormatter;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
@@ -12,7 +14,10 @@ import net.md_5.bungee.api.chat.TextComponent;
 import net.tfminecraft.guides.guide.Guide;
 import net.tfminecraft.guides.loader.GuideLoader;
 
+
 public class PageParser {
+    private static final String textColor = "#7a583c";
+
     public static List<BaseComponent[]> getParsedPages(Guide guide){
         guide.clearTags();
 
@@ -83,10 +88,11 @@ public class PageParser {
             guide.addTag(text, pageIndex);
             guide.addKeyword(text);
 
-            TextComponent c = new TextComponent(text + "\n\n");
-            c.setBold(true);
-            c.setColor(ChatColor.GOLD);
-            components.add(c);
+            BaseComponent[] parsed = TextComponent.fromLegacyText(
+                PageCenter.centerLine(StringFormatter.formatHex(textColor + "§l" + text + "§r" + "\n\n"), true)
+            );
+            components.addAll(Arrays.asList(parsed));
+
 
             return;
         }

@@ -12,11 +12,9 @@ import org.bukkit.inventory.meta.BookMeta;
 
 import me.Plugins.TLibs.Objects.API.SubAPI.StringFormatter;
 
-import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
-import net.md_5.bungee.netty.PipelineUtils.Base;
 import net.tfminecraft.guides.guide.Guide;
 import net.tfminecraft.guides.loader.GuideLoader;
 import net.tfminecraft.guides.utilities.PageCenter;
